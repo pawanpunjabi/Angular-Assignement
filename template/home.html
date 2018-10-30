@@ -1,0 +1,80 @@
+<div class="container contact-form" ng-controller="LoginController">
+<h1 class="user-formheading">Enter the below information to proceed further</h1>
+<form autocomplete="off" novalidate
+  name="userForm" 
+  ng-submit="userForm.$valid && submit(user, userForm)"
+  ng-disabled="loading"
+>
+<div class="row">
+   <div class="col-md-12">
+                        <div class="form-group">
+						    <input type="email"  class="form-control" placeholder="Email"
+          name="userEmail"
+          ng-model="user.email"
+          ng-model-options="{
+            updateOn: 'default blur',
+            debounce: {
+              'default': 500,
+              'blur': 0
+            }
+          }"   
+
+          required >
+		  
+		      <div ng-if="userForm.$submitted && userForm.userEmail.$touched"
+           ng-messages="userForm.userEmail.$error"
+           ng-messages-multiple>
+        <div ng-message="required" class="text-danger">You did not enter your email address</div>
+        <div ng-message="email" class="text-danger">You did not enter a valid email address</div>
+        <div ng-message="uniqueEmail" class="text-danger">Your email address is already taken</div>
+      </div>
+						</div>
+						<div class="form-group">
+						<select class="form-control" ng-model="user.userplan" name="userplan" >
+						<option value="">--Select Plan--</option>
+    <option>Basic</option>
+    <option >Advanced</option>
+    <option>Pro</option>
+    
+  </select>
+      <!--<div ng-if="userForm.$submitted || userForm.userplan.$touched"
+           ng-messages="userForm.userplan.$error"
+           >
+        <div ng-message="required" class="text-danger">You did not select your Plan</div>
+       
+      </div> -->
+  </div>
+						<div class="form-group">
+						    <input type="password"  class="form-control" placeholder="Password"
+          name="userPassword"
+          ng-model="user.password"
+          ng-minlength="8"
+          validate-password-characters
+          required>
+		   <div ng-if="userForm.$submitted && userForm.userPassword.$touched"
+           ng-messages="userForm.userPassword.$error"
+           ng-messages-multiple>
+        <div ng-message="required" class="text-danger">You did not enter your password</div>
+        <div ng-message="minlength" class="text-danger">Your password is too short</div>
+        <div ng-message="passwordCharacters" class="text-danger">must be 8 character long with at least one character and one special character</div>
+      </div>
+						</div>
+  
+   
+    
+   
+                <div class="form-group">
+                            <button type="submit" class="btn btn-primary" ng-disabled="loading">
+      Submit
+    </button>
+    <input type="reset" ng-click="reset(userForm)" class="btn" value="Reset">
+                        </div>
+   
+         
+
+      
+
+  </div>
+  </div>
+</form>
+</div>
